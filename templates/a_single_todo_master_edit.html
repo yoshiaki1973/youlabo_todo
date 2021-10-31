@@ -1,0 +1,29 @@
+﻿{% extends "a_layout.html" %}
+{% block content %}
+
+<div class="container-fluid">
+	<form action="a_single_todo_master_update" method="POST">
+			<table class="table">
+				<tr><td>ID          </td><td><input type="text" class="form-control" name="todo_id"                           value="{{todo.todo_id}}"></td></tr>
+				<tr><td>期限        </td><td><input type="date"                      name="exp_date"                          value="{{todo.exp_date}}">
+				<tr><td>ToDoタイトル</td><td><textarea          class="form-control" name="todo"         rows="3"  cols="100" value="{{todo.todo}}">{{todo.todo}}</textarea></td>
+				<tr><td>ToDo詳細    </td><td><textarea          class="form-control" name="todo_details" rows="10" cols="100" value="{{todo.todo_details}}">{{todo.todo_details}}</textarea></td></tr>
+			</table>
+			<p><button type="submit" class="btn btn-primary">更新</button></p>
+	</form>
+	
+	<p><button onClick="func_delete();" 				class="btn btn-primary">削除</button></p>
+	
+	<p><button onClick="window.history.back();" class="btn btn-primary">戻る</button></p>
+	
+	<script type="text/javascript">
+	  function func_delete() {
+	    if (window.confirm('本当に削除しますか？')) {
+				location.href='a_single_todo_master_delete?todo_id={{todo.todo_id}}'
+	    }
+	  }
+	</script>
+</div>
+
+{% endblock %}
+

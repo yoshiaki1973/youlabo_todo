@@ -1,0 +1,57 @@
+﻿{% extends "a_layout.html" %}
+{% block content %}
+
+<nav class="navbar navbar-default navbar-static-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<ul class="nav navbar-nav">
+				<li><a href="a_todo_master_list"       	  >通常</a></li>
+				<li><a href="a_single_todo_master_list"	  ><strong>臨時</strong></a></li>
+				<li><a href="a_user_master_list"     		  >ユーザー</a></li>
+				<li><a href="javascript:confirm_logout();">ログアウト</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<script type="text/javascript">
+		function confirm_logout() {
+			if (window.confirm('ログアウトしますか？')) {
+				location.href='logout';
+			}
+		}
+</script>
+
+<div class="container-fluid">
+	
+	<button onclick="location.href='a_single_todo_master_assignment'" class="btn btn-primary">配布...</button> 
+	<button onclick="location.href='a_single_todo_master_new'"        class="btn btn-primary">新規登録...</button> 
+	</p>
+	
+	{{ pagination.links }}
+	
+	<table class="table table-bordered">
+		<tr>
+			<th>ID</th>
+			<th>ToDo</th>
+			<th>期限</th>
+			<th>未完了数</th>
+			<th>配布数</th>
+			<th>達成率</th>
+			<th>詳細</th>
+		</tr>
+		{% for row in rows %}
+		<tr>
+			<td><a href='a_single_todo_master_edit?todo_id={{row[0]}}'>{{row[0]}}</a></td>
+			<td>{{row[1]}}</td>
+			<td>{{row[2]}}</td>
+			<td style='text-align:right'>{{row[4]}}</td>
+			<td style='text-align:right'>{{row[5]}}</td>
+			<td style='text-align:right'>{{row[6]}}%</td>
+			<td><a href='a_single_todo_master_list_details?todo_id={{row[0]}}&todo={{row[4]}}'>詳細</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+
+</div>
+{% endblock %}

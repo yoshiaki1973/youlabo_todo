@@ -1,0 +1,20 @@
+﻿{% extends "u_layout.html" %}
+{% block content %}
+<div class="container-fluid">
+	
+	<form action="login_go" method="POST" style="width:300px;">
+		
+		<div class="form-group" style="padding-top:20px;">
+			<label>ログインID（メールアドレス）</label>
+			<input type="text" class="form-control" name="email" placeholder="ログインID">
+			<label>パスワード</label>
+			<input type="password" class="form-control" name="password" placeholder="パスワード">
+		</div>
+		
+		<p><button type="submit" class="btn btn-primary">ログイン</button></p>
+	</form>
+	
+	<p><a href="password_reissue">パスワードを忘れた方はこちら</button></p>
+
+</div>
+{% endblock %}

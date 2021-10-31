@@ -1,0 +1,73 @@
+﻿{% extends "u_layout.html" %}
+{% block content %}
+
+<nav class="navbar navbar-default navbar-static-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<ul class="nav navbar-nav">
+				<li><a href="todo_todo"				><strong>通常</strong></a></li>
+				<li><a href="todo_single_todo">臨時</a></li>
+				<li>
+					<a href="#"  class="dropdown-toggle" data-toggle="dropdown"  role="button" aria-expanded="false">{{name}}<span  class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="javascript:confirm_logout();"         						>ログアウト</a></li>
+						<li><a href="login_password_change"														>パスワード変更</a></li>
+						<li><a href="user_master_edit?mentee={{name}}"								>プロフィール</a></li>
+						<li><a href="https://twitter.com/{{twitter}}" target="_blank"	>Twitter</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<script type="text/javascript">
+	function confirm_logout() {
+		if (window.confirm('ログアウトしますか？')) {
+			location.href='logout';
+		}
+	}
+</script>
+
+<div class="container-fluid">
+	{{ pagination.links }}
+	<table class="table">
+		{% for row in rows %}
+			<tr>
+				{% if row[6] == '完了' %}
+				<td style="background-color: #999999;">
+				{% else %}
+				<td >
+				{% endif %}
+					<form action="todo_update" method="POST">
+						<input type="hidden" name="user_id"      value="{{row[0]}}">
+						<input type="hidden" name="mentee"       value="{{row[2]}}">
+						<input type="hidden" name="todo_id"      value="{{row[4]}}">
+						
+						<div class="form-group">
+							<label>{{row[4]}}：「{{row[9]}}」</label>
+							<div id="{{row[4]}}">{{row[10] | cr}}</div>
+						</div>
+						
+						{% if row[6] == '未完了' %}
+							<p><button type="submit" class="btn btn-primary" onclick="func_single_todo_complete();">完了</button></p>
+						{% else %}
+							<p><button type="submit" class="btn btn-primary" onclick="func_single_todo_complete();" disabled>完了</button></p>
+						{% endif %}
+						
+						<script type="text/javascript">
+						  function func_single_todo_complete() {
+						    if (window.confirm('本当に完了しますか？')) {
+									return true;
+						    } else {
+									return false;
+							}
+						  }
+						</script>
+					</form>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+</div>
+{% endblock %}

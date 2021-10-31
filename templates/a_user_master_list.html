@@ -1,0 +1,59 @@
+﻿{% extends "a_layout.html" %}
+{% block content %}
+
+<nav class="navbar navbar-default navbar-static-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<ul class="nav navbar-nav">
+				<li><a href="a_todo_master_list"       	>通常</a></li>
+				<li><a href="a_single_todo_master_list"	>臨時</a></li>
+				<li><a href="a_user_master_list"     		><strong>ユーザー</strong></a></li>
+				<li><a href="javascript:confirm_logout();">ログアウト</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<script type="text/javascript">
+	function confirm_logout() {
+		if (window.confirm('ログアウトしますか？')) {
+			location.href='logout';
+		}
+	}
+</script>
+
+<div class="container-fluid">
+	<p>
+		<button onclick="location.href='a_user_master_new'"            class="btn btn-primary">新規登録</button> 
+		<button onclick="location.href='a_user_master_follower_count'" class="btn btn-primary">フォロワー数の更新</button>
+	</p>
+	<table class="table table-bordered">
+		<tr>
+			<th style="width:50px;">ID</th>
+			<th style="width:100px;">メンター</th>
+			<th>名前</th>
+			<th>Twitter</th>
+			<th>Email
+			<th style="width:120px;">フォロワー数</th>
+			<th style="width:120px;">達成率 (通常)</th>
+			<th style="width:120px;">達成率 (臨時)</th>
+		</tr>
+		{% for row in rows %}
+		<tr>
+			<td><a href='a_user_master_edit?email={{row[4]}}'>{{row[0]}}</a></td>
+			<td>
+				{% if row[1] == 'メンター' %}
+				<b class="text-danger">★</b>
+				{% endif %}
+			</td>
+			<td>{{row[2]}}</td>
+			<td><a href="https://twitter.com/{{row[3]}}" target="_blank">@{{row[3]}}</a></td>
+			<td>{{row[4]}}</td>
+			<td style='text-align:right'>{{row[5]}}</td>
+			<td style='text-align:right'>{{row[6]}}%</td>
+			<td style='text-align:right'>{{row[7]}}%</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+{% endblock %}

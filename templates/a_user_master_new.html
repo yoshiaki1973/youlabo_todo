@@ -1,0 +1,56 @@
+﻿{% extends "a_layout.html" %}
+{% block content %}
+
+<script type="text/javascript">
+function Input_Check(){
+  var flag = true;
+  if (user_form.email.value == ""){
+    alert("『メールアドレス』を入力してください");
+    flag 	= false;
+  };
+  if (user_form.name.value == ""){
+    alert("『名前』を入力してください");
+    flag 	= false;
+  };
+  return flag;
+}
+</script>
+
+<div class="container-fluid">
+
+<div class="form-group">
+	<form action="a_user_master_new_go" method="POST" name="user_form">
+		<div class="form-group">
+			<table class="table">
+				<tr><td style='width:150px;'>メールアドレス</td><td><input type="text" class="form-control" name="email"></td></tr>
+				<tr><td>名前</td><td><input type="text" class="form-control" name="name" ></td></tr>
+				<tr>
+					<td>ロール</td>
+					<td>
+						<select name="role" class="form-control">
+							<option value="メンティ">メンティ</option>
+							<option value="メンター">メンター</option>
+						</select>
+					</td>
+				</tr>
+				<tr><td>Twitter   </td><td><input type="text" class="form-control" name="twitter"></td></tr>
+				<tr>
+						<td>最初のToDo</td>
+            <td>
+							<select name="todo_id" class="form-control">
+								{% for id in ids %}
+								<option value="{{id}}">{{id}}</option>
+								{% endfor %}
+							</select>
+						</td>
+				</tr>
+			</table>
+			<p><button type="submit" onClick="return Input_Check();" class="btn btn-primary">ユーザーを登録する</button></p>
+		</div>
+	</form>
+	
+	<p><button onClick="window.history.back();" class="btn btn-primary">戻る</button></p>
+</div>
+
+{% endblock %}
+

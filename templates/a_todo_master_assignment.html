@@ -1,0 +1,42 @@
+﻿{% extends "a_layout.html" %}
+{% block content %}
+
+<div class="container-fluid">
+
+	<form action="a_todo_master_assignment_go" method="POST" name="todo_form">
+		
+		<table class="table" style="width:400px;">
+		<tr>
+			<td style="width:100px;">対　象</td>
+			<td>
+				<select name="todo_id" class="form-control" >
+				{% for todo_id in todo_ids %}
+					<option value="{{todo_id}}">{{todo_id}}</option>
+				{% endfor %}
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>配布先</td>
+			<td>
+				<select name="mentee" class="form-control" >
+				<option value="全ユーザー">全ユーザー</option>
+				{% for mentee in mentees %}
+				<option value="{{mentee}}">{{mentee}}</option>
+				{% endfor %}
+				</select>
+			</td>
+		</tr>
+		</table>
+		
+		<p><button type="submit" class="btn btn-primary">ToDoを配布する</button></p>
+		
+	</form>
+	
+	<p><button onClick="window.history.back();" class="btn btn-primary">戻る</button></p>
+	
+</div>
+
+{% endblock %}
+

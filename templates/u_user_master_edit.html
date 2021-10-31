@@ -1,0 +1,21 @@
+﻿{% extends "u_layout.html" %}
+{% block content %}
+
+<div class="container-fluid">
+	
+	<form action="user_master_update" method="POST">
+		<input type="hidden" name="id"      value="{{user.id}}"      class="stretch" readonly>
+		<table class="table">
+			<tr><td>名前   </td><td><input type="text" name="name"    value="{{user.name}}"    class="stretch"></td></tr>
+			<tr><td>Email  </td><td><input type="text" name="email"   value="{{user.email}}"   class="stretch"></td></tr>
+			<tr><td>Twitter</td><td><input type="text" name="twitter" value="{{user.twitter}}" class="stretch"></td></tr>
+		</table>
+		<p><button type="submit" class="btn btn-primary">プロフィールを更新する</button></p>
+	</form>
+
+	<p><button 	onClick="window.history.back();"   class="btn btn-primary">戻る</button></p>
+
+</div>
+
+{% endblock %}
+

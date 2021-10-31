@@ -1,0 +1,20 @@
+﻿{% extends "a_layout.html" %}
+{% block content %}
+
+<div class="container-fluid">
+
+<h3>アカウント作成完了</h3>
+
+<p>名前：{{name}}</p>
+<p>メールアドレス：{{email}}</p>
+<p>ロール：{{role}}</p>
+
+<p>初期パスワードをメール送信しました。</p>
+<p>メールの受信箱を確認ください。</p>
+
+<p><button onclick="location.href='login'" class="btn btn-primary">ログイン</button></p>
+
+</div>
+
+{% endblock %}
+

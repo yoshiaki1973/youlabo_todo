@@ -1,0 +1,37 @@
+﻿{% extends "a_layout.html" %}
+{% block content %}
+
+<script type="text/javascript">
+	function Input_Check(){
+	  var flag = true;
+	  if (todo_form.todo_id.value == ""){
+	    alert("『ID』を入力してください");
+	    flag = false;
+	  };
+	  if (todo_form.todo.value == ""){
+	    alert("『ToDo』を入力してください");
+	    flag = false;
+	  };
+	  return flag;
+	}
+</script>
+
+<div class="container-fluid">
+
+<p>新規登録（通常）</p>
+
+<div class="form-group">
+	<form action="a_todo_master_new_go" method="POST" name="todo_form">
+		<table class="table">
+			<tr><td>ID      </td><td><input type="text" class="form-control" name="todo_id"               ></td></tr>
+			<tr><td>後続ID  </td><td><input type="text" class="form-control" name="next_todo_id"          ></td></tr>
+			<tr><td>ToDo    </td><td><textarea          class="form-control" name="todo"         rows="4"  cols="100"></textarea></td></tr>
+			<tr><td>ToDo詳細</td><td><textarea          class="form-control" name="todo_details" rows="10" cols="100"></textarea></td></tr>
+		</table>
+		<p><button type="submit" onClick="return Input_Check();" class="btn btn-primary">登録</button></p>
+	</form>
+	<p><button onClick="window.history.back();" class="btn btn-primary">戻る</button></p>
+</div>
+
+{% endblock %}
+

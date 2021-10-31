@@ -1,0 +1,79 @@
+﻿{% extends "a_layout.html" %}
+{% block content %}
+<div class="container-fluid">
+	<div class="form-group">
+		<form action="a_single_todo_master_list_details" method="GET">
+			<input type="hidden" name="todo_id"  value={{todo_id}}>
+			<input type="hidden" name="todo"     value={{todo}}   >
+			<table class="table table-borderless" style="width:600px; padding:10px;">
+			<tr>
+				<td>
+					<select name="name" class="form-control">
+						<option hidden>名前</option>
+						{% for mentee in mentees %}
+							{% if query_mentee == mentee %}
+							<option value="{{mentee}}" selected>{{mentee}}</option>
+							{% else %}
+							<option value="{{mentee}}">{{mentee}}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				</td>
+				<td>
+					<select name="status" class="form-control">
+						<option hidden>状況</option>
+						{% if query_status == '完了' %}
+							<option value=""               ></option>
+							<option value="未完了"         >未完了</option>
+							<option value="完了"   selected>完了</option>
+						{% elif query_status == '未完了' %}
+							<option value=""               ></option>
+							<option value="未完了" selected>未完了</option>
+							<option value="完了"           >完了</option>
+						{% else %}
+							<option value=""               ></option>
+							<option value="未完了"         >未完了</option>
+							<option value="完了"           >完了</option>
+						{% endif %}
+					</select>
+				</td>
+				<td><button type="submit" value="検索" class="btn btn-primary">検索</button></td>
+			</tr>
+			</table>
+		</div>
+	</form>
+	
+	<table class="table table-bordered table-hover table-responsive" style="width:600px;">
+		<tr>
+			<th style="width:100px;">ID</th>
+			<th>名前</th>
+			<th>状況</th>
+			<th>削除</th>
+		</tr>
+		{% for data in todo_list %}
+		<tr>
+			<td><a href='a_single_todo_master_edit?todo_id={{data.todo_id}}&mentee={{data.mentee}}'>{{data.todo_id}}</a></td>
+			
+			<td>{{data.mentee}}</td>
+			
+			{% if data.status == '未完了' %}
+			<td class="text_red">{{data.status}}
+			{% else %}
+			<td class="text_center">{{data.status}}
+			{% endif %}
+			</td>
+			
+			<td><button onclick="func_delete();" class="btn btn-primary">削除</button></td>
+		</tr>
+		<script type="text/javascript">
+			function func_delete() {
+			    if (window.confirm('本当に削除しますか？')) {
+						location.href='a_single_todo_delete?todo_id={{data.todo_id}}&mentee={{data.mentee}}'
+			    }
+			}
+		</script>
+		{% endfor %}
+	</table>
+	<p><button onclick="location.href='a_todo_master_list'" class="btn btn-primary">戻る</button></p>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+﻿{% extends "a_layout.html" %}
+{% block content %}
+
+<div class="container-fluid">
+
+	<h3>{{mentee}}</h3>
+	
+	<form action="admin_todo_list_details_update" method="POST">
+	
+		<input type="hidden" class="form-control" name="mentee"  value="{{todo.mentee}}">
+		
+		<div class="form-group">
+			<label>ID：</label>
+			<input type="text" class="form-control" name="todo_id" value="{{todo.todo_id}}">
+		</div>
+		
+		<div class="form-group">
+			<label>状況：</label>
+			<select name="status" class="stretch">
+				{% if todo.status == '未完了' %}
+				<option value="未完了" selected>未完了</option>
+				<option value="完了"           >完了</option>
+				{% else %}
+				<option value="未完了"         >未完了</option>
+				<option value="完了"   selected>完了</option>
+				{% endif %}
+			</select>
+		</div>
+		
+		<div class="form-group">
+			<label>完了日：</label>
+			<input type="date" name="end"  value="{{todo.end}}" class="form-control">
+		</div>
+		
+		<p><button type="submit" class="btn btn-primary">更新</button></p>
+	
+	</form>
+	
+	<p><button onClick="location.href='a_todo_master_list';" class="btn btn-primary">戻る</button></p>
+	
+</div>
+
+{% endblock %}
+
