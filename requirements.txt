@@ -1,3 +1,4 @@
 Flask==2.0.2
 flask-paginate==0.8.1
 mysql-connector-python==8.0.26
+tweepy==4.0.1
