@@ -10,6 +10,7 @@ import string
 import tweepy
 import requests
 import json
+import os
 
 #===================================================
 # AWS RDB 設定 (MySQL)
@@ -1041,4 +1042,4 @@ def a_single_todo_assignment_go():
 
 if __name__ == "__main__":
     port_number         = 5000
-    app.run(host='0.0.0.0', port=port_number, threaded=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
